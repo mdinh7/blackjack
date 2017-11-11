@@ -5,6 +5,7 @@ class Deck {
        this.cards = []
     }
    
+    //creates initial deck
     generate(){
         let playingDeck = this.cards
         let suits = [hearts, spades, clubs, diamonds]
@@ -20,4 +21,11 @@ class Deck {
       this.cards = playingDeck
       return this.cards
     }
+
+    //shuffles deck
+    shuffle(deck){
+
+    }
 }
+
+export default class Deck {}
