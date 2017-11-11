@@ -12,10 +12,20 @@ class Player {
         this.hand.push(drawnCard)
         console.log(this.hand)
     }
+
+    deal(deck){
+        this.hit(deck)
+        this.hit(deck)
+      }
     
     //sets turn to true
     setTurn() {
        this.turn = true
+    }
+
+    //sets turn to false
+    passTurn() {
+       this.turn = false
     }
 }
 

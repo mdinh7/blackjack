@@ -12,7 +12,25 @@ class Dealer {
 
 
     hit(deck){
-      
+      let drawnCard = deck.pop()
+      console.log(drawnCard)
+      this.hand.push(drawnCard)
+      console.log(this.hand)
+    }
+
+     //sets turn to true
+     setTurn() {
+        this.turn = true
+     }
+
+    //sets turn to false
+    passTurn() {
+        this.turn = false
+    }
+
+    deal(deck){
+      this.hit(deck)
+      this.hit(deck)
     }
 }
 
