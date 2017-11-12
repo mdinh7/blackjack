@@ -1,4 +1,4 @@
-import Card from "/card"
+import Card from "./card.js"
 
 class Deck {
     constructor(){
@@ -11,8 +11,8 @@ class Deck {
         let suits = ["hearts", "spades", "clubs", "diamonds"]
         let type = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
 
-        for (i = 0; i < suits.length; i++) {
-          for (j = 0; j < type.length; j++) {
+        for (let i = 0; i < suits.length; i++) {
+          for (let j = 0; j < type.length; j++) {
             let playingCard = new Card(suits[i],type[j])
             playingDeck.push(playingCard)
           }
@@ -28,4 +28,4 @@ class Deck {
     }
 }
 
-export default class Deck {}
+export default Deck;
