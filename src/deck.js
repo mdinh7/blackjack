@@ -8,7 +8,7 @@ class Deck {
     //creates initial deck
     generate(){
         let playingDeck = this.cards
-        let suits = ["hearts", "spades", "clubs", "diamonds"]
+        let suits = ["Hearts", "Spades", "Clubs", "Diamonds"]
         let type = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"]
 
         for (let i = 0; i < suits.length; i++) {
