@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let choiceDiv = document.getElementById("choices-div");
   let roundCount = 0
   let playerWin = 0
+  let draws = 0
   let playerHitcount = 0
   let dealerHitcount = 0
 
@@ -80,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     console.log('HEEERRRREEE!!!!!!')
       if(dealer.valueCalc(dealer.hand) > 21){
         alert("YOU WIN")
+        playerWin += 1
         choiceDiv.style.display = "block"
 
         roundButton.addEventListener('click', function() {
@@ -116,6 +118,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
       } else if (dealer.valueCalc(dealer.hand) < player.valueCalc(player.hand)){
         alert("YOU WIN")
+        playerWin += 1
         choiceDiv.style.display = "block"
 
         roundButton.addEventListener('click', function() {
@@ -128,6 +131,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
      
       } else {
         alert("DRAW")
+        draws += 1
         choiceDiv.style.display = "block"
 
         roundButton.addEventListener('click', function() {
