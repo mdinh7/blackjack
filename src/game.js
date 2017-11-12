@@ -3,9 +3,9 @@ import Player from 'player';
 import Dealer from 'dealer';
 
 
-document.addEventListener("DOMContentLoaded", function(event) { 
-    // When game starts 
+document.addEventListener("DOMContentLoaded", function(event) {
 
+// When game starts 
 // create deck
 // shuffle deck
 
@@ -19,14 +19,14 @@ deck.shuffle()
 // give hand
 
 let dealer = new Dealer
-dealer.deal(deck)
+dealer.deal(deck.cards)
 
 
 // create player object
 // give hand
 
 let player = new Player
-player.deal(deck)
+player.deal(deck.cards)
 
 // create loop here
 // dealer logic: will hit until 18 or higher
@@ -48,6 +48,8 @@ while(dealer.valueCalc(dealer.hand) < 18){
     dealer.hit(deck)
     dealer.passTurn()
 }
+
+//after loop will run valueCalc on both hands, the higher value is declared winner, if player wins, win count will increase by one, round count will always increase by one. 
 
   });
   
