@@ -22,7 +22,7 @@ class Player {
               if (subTotal > 10) {
                 values.push(1)
               }
-              else if (subTotal < 10) {
+              else if (subTotal <= 10) {
                 values.push(11)
               }
            }

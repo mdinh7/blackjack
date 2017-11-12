@@ -71,8 +71,6 @@
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__deck_js__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__player_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dealer_js__ = __webpack_require__(4);
-
 
 
 
@@ -99,14 +97,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
     let deck = new __WEBPACK_IMPORTED_MODULE_0__deck_js__["a" /* default */]();
 
     deck.generate();
-    console.log(deck.cards);
     deck.shuffle(deck.cards);
     console.log(deck.cards);
 
     // create dealer object
     // give hand
 
-    let dealer = new __WEBPACK_IMPORTED_MODULE_2__dealer_js__["a" /* default */]();
+    let dealer = new __WEBPACK_IMPORTED_MODULE_1__player_js__["a" /* default */]();
     dealer.deal(deck.cards);
 
     let cardHand = document.createElement("span");
@@ -140,6 +137,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     player.setTurn();
     console.log(dealer.valueCalc(dealer.hand));
+    console.log(dealer.valueCalc(player.hand));
 
     // if(dealer.valueCalc(dealer.hand) >= 18){
     //  player.setTurn()
@@ -276,7 +274,7 @@ class Player {
                 let subTotal = values.reduce((sum, value) => sum + value);
                 if (subTotal > 10) {
                     values.push(1);
-                } else if (subTotal < 10) {
+                } else if (subTotal <= 10) {
                     values.push(11);
                 }
             }
@@ -310,69 +308,6 @@ class Player {
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (Player);
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-class Dealer {
-  constructor() {
-    this.hand = [];
-    this.turn = false;
-  }
-
-  //uses valueCalc to calculate value of hand, based on that hit will either take a card or will stay.
-
-  valueCalc(hand) {
-    let values = [];
-    hand.forEach(function (card) {
-      if (Number.isInteger(parseInt(card.name))) {
-        values.push(parseInt(card.name));
-      } else if (card.name === "Jack" || card.name === "Queen" || card.name === "King") {
-        values.push(10);
-      } else if (card.name === "Ace") {
-        values.push(0);
-      }
-    });
-
-    hand.forEach(function (card) {
-      if (card.name === "Ace") {
-        let subTotal = values.reduce((sum, value) => sum + value);
-        if (subTotal > 10) {
-          values.push(1);
-        } else if (subTotal < 10) {
-          values.push(11);
-        }
-      }
-    });
-    return values.reduce((sum, value) => sum + value);
-  }
-
-  hit(deck) {
-    let drawnCard = deck.pop();
-    console.log(drawnCard);
-    this.hand.push(drawnCard);
-    console.log(this.hand);
-  }
-
-  //sets turn to true
-  setTurn() {
-    this.turn = true;
-  }
-
-  //sets turn to false
-  passTurn() {
-    this.turn = false;
-  }
-
-  deal(deck) {
-    this.hit(deck);
-    this.hit(deck);
-  }
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (Dealer);
 
 /***/ })
 /******/ ]);

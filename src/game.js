@@ -1,6 +1,5 @@
 import Deck from './deck.js';
 import Player from './player.js';
-import Dealer from './dealer.js';
 
 
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -32,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   // create dealer object
   // give hand
 
-   let dealer = new Dealer
+   let dealer = new Player
    dealer.deal(deck.cards)
    
    let cardHand = document.createElement("span");
@@ -68,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   
   player.setTurn()
   console.log(dealer.valueCalc(dealer.hand))
+  console.log(dealer.valueCalc(player.hand))
 
   // if(dealer.valueCalc(dealer.hand) >= 18){
   //  player.setTurn()
