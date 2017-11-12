@@ -7,13 +7,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
   let startButton = document.getElementById("start-button");
   let playerDiv = document.getElementById('player-board');
   let dealerDiv = document.getElementById('dealer-board');
+  let headers = document.getElementsByTagName('h2');
   let hitButton = document.getElementById("hit-button");
   let stayButton = document.getElementById("stay-button");
 
+
   startButton.addEventListener('click', function(){
    startButton.style.display = "none";
-   playerDiv.style.display = "block";
-   dealerDiv.style.display = "block";
+   headers[0].style.display = "block";
+   headers[1].style.display = "block";
+
+   console.log(headers[0])
+  
 
    // When game starts 
    // create deck
@@ -58,55 +63,50 @@ document.addEventListener("DOMContentLoaded", function(event) {
   // after loop will run valueCalc on both hands, the higher value is declared winner, if player wins, win count will increase by one, round count will always increase by one. 
 
   
-  
-
-  if(player.turn === true){
-    hitButton.style.display = "block";
-    stayButton.style.display = "block";
-  }
-  
-  player.setTurn()
   console.log(dealer.valueCalc(dealer.hand))
   console.log(dealer.valueCalc(player.hand))
 
-  // if(dealer.valueCalc(dealer.hand) >= 18){
-  //  player.setTurn()
-  //  while(player.turn === true) {
-  //   hitButton.addEventListener('click', function() {
-  //     player.hit(deck)
-  //     player.passTurn()
-  //     console.log(player.hand)
-  //    });
+
+  if(dealer.valueCalc(dealer.hand) >= 18){
+    dealer.passTurn()
+    player.setTurn()
+    hitButton.style.display = "block";
+    stayButton.style.display = "block";
+    
+    hitButton.addEventListener('click', function() {
+      player.hit(deck.cards)
+      player.passTurn()
+      console.log(player.hand)
+     });
      
-  //    stayButton.addEventListener('click', function() {
-  //        player.passTurn()
-  //        console.log(player.hand)
-  //    });
-  //  }
-  // } else {
-  //   while(dealer.valueCalc(dealer.hand) < 18){
-  //     player.setTurn()
+     stayButton.addEventListener('click', function() {
+         player.passTurn()
+         console.log(player.hand)
+     });
+  } else {
+      player.setTurn()
+      hitButton.style.display = "block";
+      stayButton.style.display = "block";
   
-  //     hitButton.addEventListener('click', function() {
-  //      player.hit(deck)
-  //      player.passTurn()
-  //      console.log(player.hand)
-  //      dealer.setTurn()
-  //     });
+      hitButton.addEventListener('click', function() {
+       player.hit(deck.cards)
+       player.passTurn()
+       console.log(player.hand)
+       dealer.setTurn()
+      });
       
-  //     stayButton.addEventListener('click', function() {
-  //         player.passTurn()
-  //         console.log(player.hand)
-  //         dealer.setTurn()
-  //     });
+      stayButton.addEventListener('click', function() {
+        player.passTurn()
+        console.log(player.hand)
+        dealer.setTurn()
+      });
       
-  //     if(dealer.turn === true){
-  //       dealer.hit(deck)
-  //       console.log(dealer.hand)
-  //       dealer.passTurn()
-  //     }
-  //     }
-  // }
+    if(dealer.valueCalc(dealer.hand) < 18 && dealer.turn === true){
+      dealer.hit(deck.cards)
+      console.log(dealer.hand)
+      dealer.passTurn()
+    }
+  }
 
 
   //  if(dealer.turn === false && player.turn ===false){
