@@ -112,8 +112,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 // after loop will run valueCalc on both hands, the higher value is declared winner, if player wins, win count will increase by one, round count will always increase by one. 
 
 
-  let hitButton = document.getElementsByID("hit-button");
-  let stayButton = document.getElementsByID("stay-button");
+  let hitButton = document.getElementsById("hit-button");
+  let stayButton = document.getElementsById("stay-button");
   let startButton = document.getElementById("start-button");
   let playerDiv = document.getElementsByID("player-board");
   let dealerDiv = document.getElementById("dealer-board");
