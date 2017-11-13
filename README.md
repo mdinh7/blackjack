@@ -17,7 +17,7 @@ Ideally they would be able to run by typing "npm test" like here: https://gist.g
 
 ## Random Notes/Bugs:
 
-It is definitely not the cleanest, especially in my DOM manipulation it would have been cleaner to split that portion off into its own class, as well as have player and dealer inherit properties/functions from a main player class, as they each have their own small differences.
+It is definitely not the cleanest, especially in my DOM manipulation it would have been cleaner to split that portion off into its own class, as well as have player and dealer inherit properties/functions from a main player class, as they each have their own small differences. I tried to use only vanilla JS, the only dependency for development is webpacker, so that it could compile ES6.
 
 - Will send multiple alerts when you say you are done.
 - Buttons misalign when starting new round.
