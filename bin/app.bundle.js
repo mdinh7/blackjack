@@ -87,13 +87,29 @@ document.addEventListener("DOMContentLoaded", function (event) {
     let choiceDiv = document.getElementById("choices-div");
     let roundCount = 0;
     let playerWin = 0;
+    let draws = 0;
     let playerHitcount = 0;
     let dealerHitcount = 0;
+
+    let player = new __WEBPACK_IMPORTED_MODULE_1__player_js__["a" /* default */]();
+    let dealer = new __WEBPACK_IMPORTED_MODULE_1__player_js__["a" /* default */]();
 
     startButton.addEventListener('click', function () {
         startButton.style.display = "none";
         headers[0].style.display = "block";
         headers[1].style.display = "block";
+
+        let deck = new __WEBPACK_IMPORTED_MODULE_0__deck_js__["a" /* default */]();
+
+        deck.generate();
+        deck.shuffle(deck.cards);
+        console.log(deck.cards);
+
+        dealer.deal(deck.cards);
+        player.deal(deck.cards);
+
+        playerHitcount = 0;
+        dealerHitcount = 0;
 
         console.log(headers[0]);
         roundCount += 1;
@@ -103,18 +119,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
         // create deck
         // shuffle deck
 
-
-        let deck = new __WEBPACK_IMPORTED_MODULE_0__deck_js__["a" /* default */]();
-
-        deck.generate();
-        deck.shuffle(deck.cards);
-        console.log(deck.cards);
-
         // create dealer object
         // give hand
-
-        let dealer = new __WEBPACK_IMPORTED_MODULE_1__player_js__["a" /* default */]();
-        dealer.deal(deck.cards);
 
         let cardHand = document.createElement("p");
         cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS "));
@@ -123,9 +129,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         // create player object
         // give hand
-
-        let player = new __WEBPACK_IMPORTED_MODULE_1__player_js__["a" /* default */]();
-        player.deal(deck.cards);
 
         let playerHandfirst = document.createElement("p");
         let playerHandsecond = document.createElement("p");
@@ -148,56 +151,100 @@ document.addEventListener("DOMContentLoaded", function (event) {
         let winCondition = function () {
             if (dealer.turn == false && player.turn == false && dealer.valueCalc(dealer.hand) >= 18) {
                 console.log('HEEERRRREEE!!!!!!');
-                if (dealer.valueCalc(dealer.hand) > 21) {
-                    alert("YOU WIN");
-                    choiceDiv.style.display = "block";
-
-                    roundButton.addEventListener('click', function () {
-                        startButton.style.display = "block";
-                    });
-
-                    nopeButton.addEventListener('click', function () {
-                        console.log("I'M DONE");
-                    });
-                } else if (player.valueCalc(player.hand) > 21) {
-                    alert("YOU LOSE");
-                    choiceDiv.style.display = "block";
-
-                    roundButton.addEventListener('click', function () {
-                        startButton.style.display = "block";
-                    });
-
-                    nopeButton.addEventListener('click', function () {
-                        console.log("I'M DONE");
-                    });
-                } else if (dealer.valueCalc(dealer.hand) > player.valueCalc(player.hand)) {
-                    alert("YOU LOSE");
-                    choiceDiv.style.display = "block";
-
-                    roundButton.addEventListener('click', function () {
-                        startButton.style.display = "block";
-                    });
-
-                    nopeButton.addEventListener('click', function () {
-                        console.log("I'M DONE");
-                    });
-                } else if (dealer.valueCalc(dealer.hand) < player.valueCalc(player.hand)) {
-                    alert("YOU WIN");
-                    choiceDiv.style.display = "block";
-
-                    roundButton.addEventListener('click', function () {
-                        startButton.style.display = "block";
-                    });
-
-                    nopeButton.addEventListener('click', function () {
-                        console.log("I'M DONE");
-                    });
-                } else {
+                if (dealer.valueCalc(dealer.hand) > 21 && player.valueCalc(player.hand) > 21) {
                     alert("DRAW");
                     choiceDiv.style.display = "block";
 
                     roundButton.addEventListener('click', function () {
+                        player.resetHand();
+                        dealer.resetHand();
                         startButton.style.display = "block";
+                        choiceDiv.style.display = "none";
+                        hitButton.style.display = "none";
+                        stayButton.style.display = "none";
+                    });
+
+                    nopeButton.addEventListener('click', function () {
+                        console.log("I'M DONE");
+                    });
+                } else if (dealer.valueCalc(dealer.hand) > 21 && player.valueCalc(player.hand) <= 21) {
+                    alert("YOU WIN");
+                    playerWin += 1;
+                    choiceDiv.style.display = "block";
+
+                    roundButton.addEventListener('click', function () {
+                        player.resetHand();
+                        dealer.resetHand();
+                        startButton.style.display = "block";
+                        choiceDiv.style.display = "none";
+                        hitButton.style.display = "none";
+                        stayButton.style.display = "none";
+                    });
+
+                    nopeButton.addEventListener('click', function () {
+                        console.log("I'M DONE");
+                    });
+                } else if (player.valueCalc(player.hand) > 21 && dealer.valueCalc(dealer.hand) <= 21) {
+                    alert("YOU LOSE");
+                    choiceDiv.style.display = "block";
+
+                    roundButton.addEventListener('click', function () {
+                        player.resetHand();
+                        dealer.resetHand();
+                        startButton.style.display = "block";
+                        choiceDiv.style.display = "none";
+                        hitButton.style.display = "none";
+                        stayButton.style.display = "none";
+                    });
+
+                    nopeButton.addEventListener('click', function () {
+                        console.log("I'M DONE");
+                    });
+                } else if (dealer.valueCalc(dealer.hand) > player.valueCalc(player.hand) && dealer.valueCalc(dealer.hand) <= 21) {
+                    alert("YOU LOSE");
+                    choiceDiv.style.display = "block";
+
+                    roundButton.addEventListener('click', function () {
+                        player.resetHand();
+                        dealer.resetHand();
+                        startButton.style.display = "block";
+                        choiceDiv.style.display = "none";
+                        hitButton.style.display = "none";
+                        stayButton.style.display = "none";
+                    });
+
+                    nopeButton.addEventListener('click', function () {
+                        console.log("I'M DONE");
+                    });
+                } else if (dealer.valueCalc(dealer.hand) < player.valueCalc(player.hand) && player.valueCalc(player.hand) <= 21) {
+                    alert("YOU WIN");
+                    playerWin += 1;
+                    choiceDiv.style.display = "block";
+
+                    roundButton.addEventListener('click', function () {
+                        player.resetHand();
+                        dealer.resetHand();
+                        startButton.style.display = "block";
+                        choiceDiv.style.display = "none";
+                        hitButton.style.display = "none";
+                        stayButton.style.display = "none";
+                    });
+
+                    nopeButton.addEventListener('click', function () {
+                        console.log("I'M DONE");
+                    });
+                } else if (dealer.valueCalc(dealer.hand) === player.valueCalc(player.hand)) {
+                    alert("DRAW");
+                    draws += 1;
+                    choiceDiv.style.display = "block";
+
+                    roundButton.addEventListener('click', function () {
+                        player.resetHand();
+                        dealer.resetHand();
+                        startButton.style.display = "block";
+                        choiceDiv.style.display = "none";
+                        hitButton.style.display = "none";
+                        stayButton.style.display = "none";
                     });
 
                     nopeButton.addEventListener('click', function () {
@@ -218,6 +265,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 player.hit(deck.cards);
 
                 let playerNewhand = document.createElement("p");
+                console.log(playerHitcount);
+                console.log(playerIndex);
+                console.log(player.hand[playerIndex]);
                 playerNewhand.appendChild(document.createTextNode(player.hand[playerIndex].name + " of " + player.hand[playerIndex].suit));
                 playerDiv.appendChild(playerNewhand);
 
@@ -237,7 +287,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     dealerDiv.appendChild(cardHand);
                     dealer.passTurn();
                 }
-                winCondition();
             });
 
             stayButton.addEventListener('click', function () {
@@ -272,6 +321,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 player.setTurn();
                 playerHitcount += 1;
                 let playerIndex = playerHitcount + 1;
+                console.log(playerHitcount);
+                console.log(playerIndex);
+                console.log(player.hand[playerIndex]);
                 player.hit(deck.cards);
 
                 let playerNewhand = document.createElement("p");
@@ -281,7 +333,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 player.passTurn();
                 console.log(player.turn);
                 console.log(dealer.valueCalc(dealer.hand));
-                winCondition();
             });
 
             stayButton.addEventListener('click', function () {
@@ -384,6 +435,9 @@ class Player {
         return values.reduce((sum, value) => sum + value);
     }
 
+    resetHand() {
+        this.hand.length = 0;
+    }
     //adds card to hand, sets turn to true
 
     hit(deck) {

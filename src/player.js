@@ -30,7 +30,9 @@ class Player {
         return values.reduce((sum, value) => sum + value)
       }
 
-    
+    resetHand(){
+        this.hand.length = 0
+    }
     //adds card to hand, sets turn to true
 
     hit(deck){
