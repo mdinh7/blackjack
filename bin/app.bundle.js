@@ -128,12 +128,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
     player.deal(deck.cards);
 
     let cardHand = document.createElement("p");
+    let hiddenHandfirst = document.createElement("p");
+    hiddenHandfirst.appendChild(document.createTextNode(dealer.hand[0].name + " of " + dealer.hand[0].suit));
     cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS "));
     dealerDiv.appendChild(cardHand);
+    dealerDiv.appendChild(hiddenHandfirst);
 
-    let hiddenHandfirst = document.createElement("p");
     let hiddenHandsecond = document.createElement("p");
-    hiddenHandfirst.appendChild(document.createTextNode(dealer.hand[0].name + " of " + dealer.hand[0].suit));
     hiddenHandsecond.appendChild(document.createTextNode(dealer.hand[1].name + " of " + dealer.hand[1].suit));
 
     hiddenDiv.appendChild(hiddenHandfirst);
@@ -159,17 +160,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     let winCondition = function () {
       if (player.turn == false && dealer.valueCalc(dealer.hand) >= 18) {
         hiddenDiv.style.display = "block";
-        let row = dataTable.insertRow(1);
-        var cellOne = row.insertCell(0);
-        var cellTwo = row.insertCell(1);
-        var cellThree = row.insertCell(2);
-
-        cellOne.innerHTML = roundCount;
-        cellTwo.innerHTML = playerWin + " / " + (roundCount - playerWin - draws) + " / " + draws;
-
-        let winPerc = playerWin / roundCount * 100;
-        cellThree.innerHTML = winPerc + " % ";
-
         dealerDiv.innerHTML = "";
         console.log(dealer.hand);
         if (dealer.valueCalc(dealer.hand) > 21 && player.valueCalc(player.hand) > 21) {
@@ -198,6 +188,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
           console.log("WIN ERROR");
         }
 
+        let row = dataTable.insertRow(1);
+        var cellOne = row.insertCell(0);
+        var cellTwo = row.insertCell(1);
+        var cellThree = row.insertCell(2);
+
+        cellOne.innerHTML = roundCount;
+        cellTwo.innerHTML = playerWin + " / " + (roundCount - playerWin - draws) + " / " + draws;
+
+        let winPerc = playerWin / roundCount * 100;
+        cellThree.innerHTML = winPerc + " % ";
         dataTable.style.display = "block";
         hitButton.removeEventListener('click', hitEvent, true);
         stayButton.removeEventListener('click', stayEvent, true);
