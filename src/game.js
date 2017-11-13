@@ -57,10 +57,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
    player.deal(deck.cards)
 
    let cardHand = document.createElement("p");
-   cardHand.id = 'card-count';
    let dealerHandfirst = document.createElement("p");
    dealerHandfirst.appendChild(document.createTextNode(dealer.hand[0].name + " of " + dealer.hand[0].suit))
-   cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS TOTAL"))
+   cardHand.appendChild(document.createTextNode("CARD " + dealer.hand.length))
    dealerDiv.appendChild(dealerHandfirst)
    dealerDiv.appendChild(cardHand)
    
@@ -149,13 +148,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
   } 
  }  
 
-   
- hitButton.addEventListener('click',hitEvent, true );
- stayButton.addEventListener('click', stayEvent, true);
-
   let resetStyle = function() {
     playerDiv.innerHTML = "";
     hiddenDiv.innerHTML = "";
+    dealerDiv.innerHTML - "";
     hiddenDiv.style.display = "none";
     startButton.style.display = "block";
     choiceDiv.style.display = "none";
@@ -191,17 +187,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
         dealer.hit(deck.cards)
         console.log("NEW HAND")
         console.log(dealer.hand.length)
-        let prevCount = document.getElementById('card-count');
-        prevCount.remove()
         let cardHand = document.createElement("p");
-        cardHand.id = 'card-count';
-        cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS TOTAL"))
+        cardHand.appendChild(document.createTextNode("CARD " + dealer.hand.length))
+        dealerDiv.appendChild(cardHand)
 
         let dealerHiddenHand = document.createElement("p");
         dealerHiddenHand.appendChild(document.createTextNode(dealer.hand[dealerIndex].name + " of " + dealer.hand[dealerIndex].suit))
         hiddenDiv.appendChild(dealerHiddenHand)
      
-        dealerDiv.appendChild(cardHand)
         dealer.passTurn()
       }
      } else if(dealer.valueCalc(dealer.hand) >= 18){
@@ -240,17 +233,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
         dealer.hit(deck.cards)
         console.log("NEW HAND")
         console.log(dealer.hand.length)
-        let prevCount = document.getElementById('card-count');
-        prevCount.remove()
         let cardHand = document.createElement("p");
-        cardHand.id = 'card-count';
-        cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS TOTAL"))
+        cardHand.appendChild(document.createTextNode("CARD " + dealer.hand.length))
+        dealerDiv.appendChild(cardHand)
 
         let dealerHiddenHand = document.createElement("p");
         dealerHiddenHand.appendChild(document.createTextNode(dealer.hand[dealerIndex].name + " of " + dealer.hand[dealerIndex].suit))
         hiddenDiv.appendChild(dealerHiddenHand)
      
-        dealerDiv.appendChild(cardHand)
         dealer.passTurn()
       }
     } else if(dealer.valueCalc(dealer.hand) >= 18){
@@ -262,7 +252,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     winCondition()
   }
 
-
+  hitButton.addEventListener('click',hitEvent, true );
+  stayButton.addEventListener('click', stayEvent, true);
  });
 });
   
