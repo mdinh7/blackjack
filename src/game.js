@@ -24,25 +24,34 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 
   startButton.addEventListener('click', function(){
+   player.resetHand()
+   dealer.resetHand()
    startButton.style.display = "none";
    headers[0].style.display = "block";
    headers[1].style.display = "block";
 
    let deck = new Deck
    
-   deck.generate()
-   deck.shuffle(deck.cards)
-   console.log(deck.cards)
-
-
    dealer.deal(deck.cards)
    player.deal(deck.cards)
 
    playerHitcount = 0
    dealerHitcount = 0
 
-   console.log(headers[0])
    roundCount += 1
+   let totalRounds = 0
+   if (roundCount === 1){
+     deck.generate()
+     deck.shuffle(deck.cards)
+   }else if (roundCount === 6){
+     deck.shuffle(deck.cards)
+     totalRounds += 6
+     roundCount = 0
+   }else {
+     console.log(ERROR)
+   }
+
+
    console.log(roundCount)
   
 
@@ -80,15 +89,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
   console.log(dealer.valueCalc(player.hand))
 
  let winCondition = function(){
-  if(dealer.turn == false && player.turn == false && dealer.valueCalc(dealer.hand) >= 18){
+  if(player.turn == false && dealer.valueCalc(dealer.hand) >= 18){
     console.log('HEEERRRREEE!!!!!!')
       if(dealer.valueCalc(dealer.hand) > 21 && player.valueCalc(player.hand) > 21){
         alert("DRAW")
         choiceDiv.style.display = "block"
 
         roundButton.addEventListener('click', function() {
-            player.resetHand()
-            dealer.resetHand()
             startButton.style.display = "block";
             choiceDiv.style.display = "none";
             hitButton.style.display = "none";
@@ -104,8 +111,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         choiceDiv.style.display = "block"
 
         roundButton.addEventListener('click', function() {
-            player.resetHand()
-            dealer.resetHand()
             startButton.style.display = "block";
             choiceDiv.style.display = "none";
             hitButton.style.display = "none";
@@ -121,8 +126,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         choiceDiv.style.display = "block"
 
         roundButton.addEventListener('click', function() {
-            player.resetHand()
-            dealer.resetHand()
             startButton.style.display = "block";
             choiceDiv.style.display = "none";
             hitButton.style.display = "none";
@@ -136,10 +139,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
       } else if(dealer.valueCalc(dealer.hand) > player.valueCalc(player.hand) && dealer.valueCalc(dealer.hand) <= 21) {
         alert("YOU LOSE")
         choiceDiv.style.display = "block"
+        
 
         roundButton.addEventListener('click', function() {
-            player.resetHand()
-            dealer.resetHand()
             startButton.style.display = "block";
             choiceDiv.style.display = "none";
             hitButton.style.display = "none";
@@ -156,8 +158,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         choiceDiv.style.display = "block"
 
         roundButton.addEventListener('click', function() {
-            player.resetHand()
-            dealer.resetHand()
             startButton.style.display = "block";
             choiceDiv.style.display = "none";
             hitButton.style.display = "none";
@@ -174,8 +174,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         choiceDiv.style.display = "block"
 
         roundButton.addEventListener('click', function() {
-            player.resetHand()
-            dealer.resetHand()
             startButton.style.display = "block";
             choiceDiv.style.display = "none";
             hitButton.style.display = "none";
@@ -186,6 +184,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
             console.log("I'M DONE")
         });
   
+     } else {
+       console.log(ERROR)
      }
 
 
