@@ -5,8 +5,8 @@ import Player from './player.js';
 document.addEventListener("DOMContentLoaded", function(event) {
 
   let startButton = document.getElementById("start-button");
-  let playerDiv = document.getElementById('player-board');
-  let dealerDiv = document.getElementById('dealer-board');
+  let playerDiv = document.getElementById('player-card');
+  let dealerDiv = document.getElementById('dealer-card');
   let headers = document.getElementsByTagName('h2');
   let hitButton = document.getElementById("hit-button");
   let stayButton = document.getElementById("stay-button");
@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   let player = new Player
   let dealer = new Player
-
 
   startButton.addEventListener('click', function(){
    startButton.style.display = "none";
@@ -197,7 +196,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
        console.log(ERROR)
      }
 
-
+     playerDiv.innerHTML = "";
+     dealerDiv.innerHTML = "";
   } 
  }  
   

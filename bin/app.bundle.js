@@ -77,8 +77,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 document.addEventListener("DOMContentLoaded", function (event) {
 
   let startButton = document.getElementById("start-button");
-  let playerDiv = document.getElementById('player-board');
-  let dealerDiv = document.getElementById('dealer-board');
+  let playerDiv = document.getElementById('player-card');
+  let dealerDiv = document.getElementById('dealer-card');
   let headers = document.getElementsByTagName('h2');
   let hitButton = document.getElementById("hit-button");
   let stayButton = document.getElementById("stay-button");
@@ -259,6 +259,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
         } else {
           console.log(ERROR);
         }
+
+        playerDiv.innerHTML = "";
+        dealerDiv.innerHTML = "";
       }
     };
 
