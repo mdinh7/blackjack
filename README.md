@@ -10,6 +10,8 @@
 
 ## Testing:
 
-A few simple tests are included to run them, simply type Jasmine after you run npm install.
+A few simple tests are included to run them, simply type "npm test" after you run npm install.
+
+** Credit to this gist for helping me find out how to test ES6 using Jasmine: https://gist.github.com/mauvm/172878a9646095d03fd7
 
 
