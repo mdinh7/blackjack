@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
   let player = new Player
   let dealer = new Player
+
   let deck = new Deck
 
   startButton.addEventListener('click', function(){
@@ -36,9 +37,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
    dealer.resetHand();
 
 
-
    roundCount += 1
    console.log(roundCount)
+
    if(roundCount === 1){
      deck.generate()
      deck.shuffle(deck.cards)
@@ -133,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     stayButton.style.display = "block";
   
     hitButton.addEventListener('click', function() {
-       if (dealer.valueCalc(dealer.hand) < 18){
+     if (dealer.valueCalc(dealer.hand) < 18){
        player.setTurn()
        playerHitcount += 1
        let playerIndex = playerHitcount + 1
@@ -150,7 +151,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
        dealer.setTurn()
  
-       if(dealer.valueCalc(dealer.hand) < 18 && dealer.turn === true){
+      if(dealer.valueCalc(dealer.hand) < 18 && dealer.turn === true){
          console.log(dealer.hand.length)
          dealerHitcount += 1
          dealer.hit(deck.cards)
@@ -162,7 +163,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
          dealerDiv.appendChild(cardHand)
          dealer.passTurn()
        }
-      }else if(dealer.valueCalc(dealer.hand) >= 18){
+      } else if(dealer.valueCalc(dealer.hand) >= 18){
         player.setTurn()
         playerHitcount += 1
         let playerIndex = playerHitcount + 1
@@ -204,6 +205,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
           dealer.passTurn()
         }
       } else if(dealer.valueCalc(dealer.hand) >= 18){
+         dealer.passTurn()
          player.setTurn()
          player.passTurn()
          console.log(player.turn)

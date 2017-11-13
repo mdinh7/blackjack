@@ -94,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   let player = new __WEBPACK_IMPORTED_MODULE_1__player_js__["a" /* default */]();
   let dealer = new __WEBPACK_IMPORTED_MODULE_1__player_js__["a" /* default */]();
+
   let deck = new __WEBPACK_IMPORTED_MODULE_0__deck_js__["a" /* default */]();
 
   startButton.addEventListener('click', function () {
@@ -109,6 +110,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     roundCount += 1;
     console.log(roundCount);
+
     if (roundCount === 1) {
       deck.generate();
       deck.shuffle(deck.cards);
@@ -267,6 +269,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
           dealer.passTurn();
         }
       } else if (dealer.valueCalc(dealer.hand) >= 18) {
+        dealer.passTurn();
         player.setTurn();
         player.passTurn();
         console.log(player.turn);
