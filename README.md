@@ -10,6 +10,16 @@
 
 ## Testing:
 
-A few simple tests are included to run them, simply type Jasmine after you run npm install.
+Some Jasmine tests are written, but I was unable to get them to work due to writing the classes in ES6, and Jasmine not playing so nice with node for me.
+
+Ideally they would be able to run by typing "npm test" like here: https://gist.github.com/mauvm/172878a9646095d03fd7
+
+
+## Random Notes/Bugs:
+
+It is definitely not the cleanest, especially in my DOM manipulation it would have been cleaner to split that portion off into its own class, as well as have player and dealer inherit properties/functions from a main player class, as they each have their own small differences.
+
+- Will send multiple alerts when you say you are done.
+- Buttons misalign when starting new round.
 
 
