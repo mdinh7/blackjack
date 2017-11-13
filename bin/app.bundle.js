@@ -128,15 +128,17 @@ document.addEventListener("DOMContentLoaded", function (event) {
     player.deal(deck.cards);
 
     let cardHand = document.createElement("p");
-    let hiddenHandfirst = document.createElement("p");
-    hiddenHandfirst.appendChild(document.createTextNode(dealer.hand[0].name + " of " + dealer.hand[0].suit));
-    cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS "));
+    cardHand.id = 'card-count';
+    let dealerHandfirst = document.createElement("p");
+    dealerHandfirst.appendChild(document.createTextNode(dealer.hand[0].name + " of " + dealer.hand[0].suit));
+    cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS TOTAL"));
+    dealerDiv.appendChild(dealerHandfirst);
     dealerDiv.appendChild(cardHand);
-    dealerDiv.appendChild(hiddenHandfirst);
 
+    let hiddenHandfirst = document.createElement("p");
     let hiddenHandsecond = document.createElement("p");
+    hiddenHandfirst.appendChild(document.createTextNode(dealer.hand[0].name + " of " + dealer.hand[0].suit));
     hiddenHandsecond.appendChild(document.createTextNode(dealer.hand[1].name + " of " + dealer.hand[1].suit));
-
     hiddenDiv.appendChild(hiddenHandfirst);
     hiddenDiv.appendChild(hiddenHandsecond);
 
@@ -147,6 +149,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     playerDiv.appendChild(playerHandfirst);
     playerDiv.appendChild(playerHandsecond);
+
+    hitButton.style.display = "block";
+    stayButton.style.display = "block";
 
     // dealer logic: will hit until 18 or higher
     // player: can choose to hit or stay
@@ -207,8 +212,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
       }
     };
 
-    hitButton.style.display = "block";
-    stayButton.style.display = "block";
+    hitButton.addEventListener('click', hitEvent, true);
+    stayButton.addEventListener('click', stayEvent, true);
 
     let resetStyle = function () {
       playerDiv.innerHTML = "";
@@ -248,8 +253,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
           dealer.hit(deck.cards);
           console.log("NEW HAND");
           console.log(dealer.hand.length);
+          let prevCount = document.getElementById('card-count');
+          prevCount.remove();
           let cardHand = document.createElement("p");
-          cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS "));
+          cardHand.id = 'card-count';
+          cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS TOTAL"));
 
           let dealerHiddenHand = document.createElement("p");
           dealerHiddenHand.appendChild(document.createTextNode(dealer.hand[dealerIndex].name + " of " + dealer.hand[dealerIndex].suit));
@@ -294,8 +302,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
           dealer.hit(deck.cards);
           console.log("NEW HAND");
           console.log(dealer.hand.length);
+          let prevCount = document.getElementById('card-count');
+          prevCount.remove();
           let cardHand = document.createElement("p");
-          cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS "));
+          cardHand.id = 'card-count';
+          cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS TOTAL"));
 
           let dealerHiddenHand = document.createElement("p");
           dealerHiddenHand.appendChild(document.createTextNode(dealer.hand[dealerIndex].name + " of " + dealer.hand[dealerIndex].suit));
@@ -312,9 +323,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
       }
       winCondition();
     };
-
-    hitButton.addEventListener('click', hitEvent, true);
-    stayButton.addEventListener('click', stayEvent, true);
   });
 });
 
