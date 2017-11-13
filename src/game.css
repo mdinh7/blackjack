@@ -1,0 +1,57 @@
+body{
+  font-family: Courier New, Courier, monospace;
+}
+
+#data-table {
+    border: 2px solid black;
+    width: 38%;
+    margin-left:auto; 
+    margin-right:auto;
+    text-align: center;
+}
+
+th{
+    border: 1px solid black;
+}
+td {
+    border: 1px solid black;
+}
+
+#dealer-board { 
+ margin: 0; 
+ padding: 0; 
+ text-align: center; 
+}
+
+#player-board { 
+    margin: 0; 
+    padding: 0; 
+    text-align: center; 
+}
+
+#choices-div { 
+    margin: 0; 
+    padding: 0; 
+    text-align: center; 
+} 
+
+#start-game {
+    text-align: center;
+}
+
+#player-choice {
+    display: flex;
+    justify-content: center;
+}
+
+#player-choice.button{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}

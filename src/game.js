@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let winPerc = playerWin/roundCount*100
     cellThree.innerHTML = winPerc + " % ";
     
-    dataTable.style.display = "block";
+    dealerDiv.innerHTML = "";
     console.log(dealer.hand)
       if(dealer.valueCalc(dealer.hand) > 21 && player.valueCalc(player.hand) > 21){
         alert("DRAW")
@@ -134,30 +134,34 @@ document.addEventListener("DOMContentLoaded", function(event) {
        console.log("WIN ERROR")
       }
 
+    dataTable.style.display = "block";
     hitButton.removeEventListener('click',hitEvent, true );
     stayButton.removeEventListener('click', stayEvent, true);
 
 
-    roundButton.addEventListener('click', function() {
-      playerDiv.innerHTML = "";
-      dealerDiv.innerHTML = "";
-      hiddenDiv.innerHTML = "";
-      hiddenDiv.style.display = "none";
-      startButton.style.display = "block";
-      choiceDiv.style.display = "none";
-      hitButton.style.display = "none";
-      stayButton.style.display = "none";
-      dataTable.style.display = "none";
-    });
-
-    nopeButton.addEventListener('click', function() {
-      dataTable.style.display = "block";
-    });
+    roundButton.addEventListener('click', resetStyle, true );
+    nopeButton.addEventListener('click', finish, true);
   } 
  }  
   
     hitButton.style.display = "block";
     stayButton.style.display = "block";
+
+  let resetStyle = function() {
+    playerDiv.innerHTML = "";
+    hiddenDiv.innerHTML = "";
+    hiddenDiv.style.display = "none";
+    startButton.style.display = "block";
+    choiceDiv.style.display = "none";
+    hitButton.style.display = "none";
+    stayButton.style.display = "none";
+    dataTable.style.display = "none";
+  }
+
+  let finish = function() {
+    dataTable.style.display = "block";
+    alert("Thanks for playing! You won " + playerWin + " out of " + roundCount + " of your games!")
+  }
 
   let hitEvent = function() {
     if (dealer.valueCalc(dealer.hand) < 18){

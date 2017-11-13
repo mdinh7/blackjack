@@ -6,26 +6,30 @@
     <script src="bin/app.bundle.js" charset="utf-8"></script>
 </head>
     <body>
-        <button id="start-button" type="button">Click to Begin Game!</button>
+        <div id="start-game">
+            <button id="start-button" type="button">Click to Begin Game!</button>
+        </div>
         <div id="dealer-board">
-            <h2 id="header" style = "display: none;">Dealer's Hand</h2>
+            <h2 id="header" class="hidden">Dealer's Hand</h2>
             <div id="dealer-card" ></div>
-            <div id="dealer-hide" style = "display: none;"></div>
+            <div id="dealer-hide" class="hidden"></div>
         </div>
         <div id="player-board">
-            <h2 id="header" style = "display: none;">Your Hand</h2>
+            <h2 id="header" class="hidden">Your Hand</h2>
             <div id="player-card">
             </div>
-            <button id="hit-button" type="button" style = "display: none;">Hit</button> <br>
-            <button id="stay-button" type="button" style = "display: none;">Stay</button>
+            <div id="player-choice">
+              <button id="hit-button" type="button" class="hidden">Hit</button><br>
+              <button id="stay-button" type="button" class="hidden">Stay</button>
+            </div>
         </div>
-        <div id="choices-div" style = "display: none;">
+        <div id="choices-div" class="hidden">
             <h3> Would you like to play again? </h3>
-            <button id="another-round-button" type="button">One More Round!</button> <br>
+            <button id="another-round-button" type="button">One More Round!</button>
             <button id="nope-button" type="button" >I'm Done...</button>
         </div>
         <br>
-        <table id="data-table" style="display: none;">
+        <table id="data-table" class="hidden">
                 <tr>
                   <th>Round</th>
                   <th>Wins/Losses/Draws</th> 
