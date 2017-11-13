@@ -27,23 +27,30 @@ document.addEventListener("DOMContentLoaded", function(event) {
    startButton.style.display = "none";
    headers[0].style.display = "block";
    headers[1].style.display = "block";
+   playerHitcount = 0
+   dealerHitcount = 0
 
    let deck = new Deck
-   
    deck.generate()
-   deck.shuffle(deck.cards)
-   console.log(deck.cards)
+   let totalRounds = 0
+
+   roundCount += 1
+   console.log(roundCount)
+   if(roundCount === 1){
+     deck.shuffle(deck.cards)
+    console.log(deck.cards)
+   } else if (roundCount === 6) {
+     deck.shuffle(deck.cards)
+     roundCount = 0
+     totalRounds += 6
+   } else {
+     console.log("ERROR")
+   }
 
 
    dealer.deal(deck.cards)
    player.deal(deck.cards)
 
-   playerHitcount = 0
-   dealerHitcount = 0
-
-   console.log(headers[0])
-   roundCount += 1
-   console.log(roundCount)
   
 
    // When game starts 
