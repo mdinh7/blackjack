@@ -10,8 +10,13 @@
 
 ## Testing:
 
-A few simple tests are included to run them, simply type "npm test" after you run npm install.
+Some Jasmine tests are written, but I was unable to get them to work due to writing the classes in ES6, and Jasmine not playing so nice with node for me.
 
-** Credit to this gist for helping me find out how to test ES6 using Jasmine: https://gist.github.com/mauvm/172878a9646095d03fd7
+Ideally they would be able to run by typing "npm test" like here: https://gist.github.com/mauvm/172878a9646095d03fd7
+
+
+## Random Notes:
+
+It is definitely not the cleanest, especially in my DOM manipulation it would have been cleaner to split that portion off into its own class, as well as have player and dealer inherit properties/functions from a main player class, as they each have their own small differences.
 
 
