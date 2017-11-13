@@ -178,6 +178,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
           console.log("WIN ERROR");
         }
 
+        hitButton.removeEventListener('click', hitEvent, true);
+        stayButton.removeEventListener('click', stayEvent, true);
+
         playerDiv.innerHTML = "";
         dealerDiv.innerHTML = "";
 
@@ -197,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     hitButton.style.display = "block";
     stayButton.style.display = "block";
 
-    hitButton.addEventListener('click', function () {
+    let hitEvent = function () {
       if (dealer.valueCalc(dealer.hand) < 18) {
         player.setTurn();
         playerHitcount += 1;
@@ -244,9 +247,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
         console.log(player.turn);
         console.log(dealer.valueCalc(dealer.hand));
       }
-    });
+    };
 
-    stayButton.addEventListener('click', function () {
+    let stayEvent = function () {
       if (dealer.valueCalc(dealer.hand) < 18) {
         player.setTurn();
         player.passTurn();
@@ -275,7 +278,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
         console.log(player.turn);
       }
       winCondition();
-    });
+    };
+
+    hitButton.addEventListener('click', hitEvent, true);
+    stayButton.addEventListener('click', stayEvent, true);
   });
 });
 

@@ -113,6 +113,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
       } else {
        console.log("WIN ERROR")
       }
+     
+     hitButton.removeEventListener('click',hitEvent, true );
+     stayButton.removeEventListener('click', stayEvent, true);
 
      playerDiv.innerHTML = "";
      dealerDiv.innerHTML = "";
@@ -132,86 +135,89 @@ document.addEventListener("DOMContentLoaded", function(event) {
   
     hitButton.style.display = "block";
     stayButton.style.display = "block";
-  
-    hitButton.addEventListener('click', function() {
-     if (dealer.valueCalc(dealer.hand) < 18){
+
+  let hitEvent = function() {
+    if (dealer.valueCalc(dealer.hand) < 18){
+      player.setTurn()
+      playerHitcount += 1
+      let playerIndex = playerHitcount + 1
+      player.hit(deck.cards)
+
+      let playerNewhand = document.createElement("p");
+      console.log(playerHitcount)
+      console.log(playerIndex)
+      console.log(player.hand[playerIndex])
+      playerNewhand.appendChild(document.createTextNode(player.hand[playerIndex].name + " of " + player.hand[playerIndex].suit))
+      playerDiv.appendChild(playerNewhand)
+      
+      player.passTurn()
+
+      dealer.setTurn()
+
+     if(dealer.valueCalc(dealer.hand) < 18 && dealer.turn === true){
+        console.log(dealer.hand.length)
+        dealerHitcount += 1
+        dealer.hit(deck.cards)
+        console.log("NEW HAND")
+        console.log(dealer.hand.length)
+        let cardHand = document.createElement("p");
+        cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS "))
+     
+        dealerDiv.appendChild(cardHand)
+        dealer.passTurn()
+      }
+     } else if(dealer.valueCalc(dealer.hand) >= 18){
        player.setTurn()
        playerHitcount += 1
        let playerIndex = playerHitcount + 1
+       console.log(playerHitcount);
+       console.log(playerIndex);
+       console.log(player.hand[playerIndex]);
        player.hit(deck.cards)
-
+ 
        let playerNewhand = document.createElement("p");
-       console.log(playerHitcount)
-       console.log(playerIndex)
-       console.log(player.hand[playerIndex])
        playerNewhand.appendChild(document.createTextNode(player.hand[playerIndex].name + " of " + player.hand[playerIndex].suit))
        playerDiv.appendChild(playerNewhand)
        
        player.passTurn()
-
-       dealer.setTurn()
- 
-      if(dealer.valueCalc(dealer.hand) < 18 && dealer.turn === true){
-         console.log(dealer.hand.length)
-         dealerHitcount += 1
-         dealer.hit(deck.cards)
-         console.log("NEW HAND")
-         console.log(dealer.hand.length)
-         let cardHand = document.createElement("p");
-         cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS "))
-      
-         dealerDiv.appendChild(cardHand)
-         dealer.passTurn()
-       }
-      } else if(dealer.valueCalc(dealer.hand) >= 18){
-        player.setTurn()
-        playerHitcount += 1
-        let playerIndex = playerHitcount + 1
-        console.log(playerHitcount);
-        console.log(playerIndex);
-        console.log(player.hand[playerIndex]);
-        player.hit(deck.cards)
-  
-        let playerNewhand = document.createElement("p");
-        playerNewhand.appendChild(document.createTextNode(player.hand[playerIndex].name + " of " + player.hand[playerIndex].suit))
-        playerDiv.appendChild(playerNewhand)
-        
-        player.passTurn()
-        console.log(player.turn)
-        console.log(dealer.valueCalc(dealer.hand))
-       }
-    });
-      
-    stayButton.addEventListener('click', function() {
-      if (dealer.valueCalc(dealer.hand) < 18){ 
-        player.setTurn()
-        player.passTurn()
-        console.log(player.hand)
-        console.log(dealer.valueCalc(dealer.hand))
-        console.log(player.turn)
-
-        dealer.setTurn()
-  
-        if(dealer.valueCalc(dealer.hand) < 18 && dealer.turn === true){
-          console.log(dealer.hand.length)
-          dealerHitcount += 1
-          dealer.hit(deck.cards)
-          console.log("NEW HAND")
-          console.log(dealer.hand.length)
-          let cardHand = document.createElement("p");
-          cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS "))
-       
-          dealerDiv.appendChild(cardHand)
-          dealer.passTurn()
-        }
-      } else if(dealer.valueCalc(dealer.hand) >= 18){
-         dealer.passTurn()
-         player.setTurn()
-         player.passTurn()
-         console.log(player.turn)
+       console.log(player.turn)
+       console.log(dealer.valueCalc(dealer.hand))
       }
-      winCondition()
-    });
+   }
+  
+  let stayEvent = function() {
+    if (dealer.valueCalc(dealer.hand) < 18){ 
+      player.setTurn()
+      player.passTurn()
+      console.log(player.hand)
+      console.log(dealer.valueCalc(dealer.hand))
+      console.log(player.turn)
+
+      dealer.setTurn()
+
+      if(dealer.valueCalc(dealer.hand) < 18 && dealer.turn === true){
+        console.log(dealer.hand.length)
+        dealerHitcount += 1
+        dealer.hit(deck.cards)
+        console.log("NEW HAND")
+        console.log(dealer.hand.length)
+        let cardHand = document.createElement("p");
+        cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS "))
+     
+        dealerDiv.appendChild(cardHand)
+        dealer.passTurn()
+      }
+    } else if(dealer.valueCalc(dealer.hand) >= 18){
+       dealer.passTurn()
+       player.setTurn()
+       player.passTurn()
+       console.log(player.turn)
+    }
+    winCondition()
+  }
+
+    hitButton.addEventListener('click',hitEvent, true );
+    stayButton.addEventListener('click', stayEvent, true);
     
  });
 });
