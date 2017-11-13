@@ -56,20 +56,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
    dealer.deal(deck.cards)
    player.deal(deck.cards)
 
+   // shows first card, puts hidden card as CARD 2
    let cardHand = document.createElement("p");
    let dealerHandfirst = document.createElement("p");
    dealerHandfirst.appendChild(document.createTextNode(dealer.hand[0].name + " of " + dealer.hand[0].suit))
    cardHand.appendChild(document.createTextNode("CARD " + dealer.hand.length))
+
    dealerDiv.appendChild(dealerHandfirst)
    dealerDiv.appendChild(cardHand)
    
+   // places cards in hidden div to be shown later
    let hiddenHandfirst = document.createElement("p");
    let hiddenHandsecond = document.createElement("p");
    hiddenHandfirst.appendChild(document.createTextNode(dealer.hand[0].name + " of " + dealer.hand[0].suit))
    hiddenHandsecond.appendChild(document.createTextNode(dealer.hand[1].name + " of " + dealer.hand[1].suit))
+
    hiddenDiv.appendChild(hiddenHandfirst)
    hiddenDiv.appendChild(hiddenHandsecond)
-
+   
+   // shows players hand
    let playerHandfirst = document.createElement("p");
    let playerHandsecond = document.createElement("p");
    playerHandfirst.appendChild(document.createTextNode(player.hand[0].name + " of " + player.hand[0].suit))
@@ -77,7 +82,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
    playerDiv.appendChild(playerHandfirst)
    playerDiv.appendChild(playerHandsecond)
-
+  
+   // reveal hit/stay buttons
    hitButton.style.display = "block";
    stayButton.style.display = "block";
 
@@ -127,6 +133,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
       } else {
        console.log("WIN ERROR")
       }
+    roundButton.addEventListener('click', resetStyle, true );
+    nopeButton.addEventListener('click', finish, true);
     
     let row = dataTable.insertRow(1);
     var cellOne = row.insertCell(0);
@@ -142,9 +150,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     hitButton.removeEventListener('click',hitEvent, true );
     stayButton.removeEventListener('click', stayEvent, true);
 
-
-    roundButton.addEventListener('click', resetStyle, true );
-    nopeButton.addEventListener('click', finish, true);
   } 
  }  
 
@@ -218,12 +223,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   
   let stayEvent = function() {
     if (dealer.valueCalc(dealer.hand) < 18){ 
-      player.setTurn()
       player.passTurn()
-      console.log(player.hand)
-      console.log(dealer.valueCalc(dealer.hand))
-      console.log(player.turn)
-
       dealer.setTurn()
 
       if(dealer.valueCalc(dealer.hand) < 18 && dealer.turn === true){
@@ -235,25 +235,24 @@ document.addEventListener("DOMContentLoaded", function(event) {
         console.log(dealer.hand.length)
         let cardHand = document.createElement("p");
         cardHand.appendChild(document.createTextNode("CARD " + dealer.hand.length))
-        dealerDiv.appendChild(cardHand)
 
         let dealerHiddenHand = document.createElement("p");
         dealerHiddenHand.appendChild(document.createTextNode(dealer.hand[dealerIndex].name + " of " + dealer.hand[dealerIndex].suit))
         hiddenDiv.appendChild(dealerHiddenHand)
-     
+        
+        dealerDiv.appendChild(cardHand)
         dealer.passTurn()
       }
     } else if(dealer.valueCalc(dealer.hand) >= 18){
        dealer.passTurn()
-       player.setTurn()
        player.passTurn()
        console.log(player.turn)
     }
     winCondition()
   }
-
-  hitButton.addEventListener('click',hitEvent, true );
+  
   stayButton.addEventListener('click', stayEvent, true);
+  hitButton.addEventListener('click', hitEvent, true );
  });
 });
   
