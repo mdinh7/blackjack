@@ -79,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
   let startButton = document.getElementById("start-button");
   let playerDiv = document.getElementById('player-card');
   let dealerDiv = document.getElementById('dealer-card');
+  let hiddenDiv = document.getElementById('dealer-hide');
   let headers = document.getElementsByTagName('h2');
   let hitButton = document.getElementById("hit-button");
   let stayButton = document.getElementById("stay-button");
@@ -130,8 +131,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     let cardHand = document.createElement("p");
     cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS "));
-
     dealerDiv.appendChild(cardHand);
+
+    let hiddenHandfirst = document.createElement("p");
+    let hiddenHandsecond = document.createElement("p");
+    hiddenHandfirst.appendChild(document.createTextNode(dealer.hand[0].name + " of " + dealer.hand[0].suit));
+    hiddenHandsecond.appendChild(document.createTextNode(dealer.hand[1].name + " of " + dealer.hand[1].suit));
+
+    hiddenDiv.appendChild(hiddenHandfirst);
+    hiddenDiv.appendChild(hiddenHandsecond);
 
     let playerHandfirst = document.createElement("p");
     let playerHandsecond = document.createElement("p");
@@ -152,7 +160,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     let winCondition = function () {
       if (player.turn == false && dealer.valueCalc(dealer.hand) >= 18) {
-        console.log('HEEERRRREEE!!!!!!');
+        hiddenDiv.style.display = "block";
+        console.log(dealer.hand);
         if (dealer.valueCalc(dealer.hand) > 21 && player.valueCalc(player.hand) > 21) {
           alert("DRAW");
           choiceDiv.style.display = "block";
@@ -181,10 +190,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
         hitButton.removeEventListener('click', hitEvent, true);
         stayButton.removeEventListener('click', stayEvent, true);
 
-        playerDiv.innerHTML = "";
-        dealerDiv.innerHTML = "";
-
         roundButton.addEventListener('click', function () {
+          playerDiv.innerHTML = "";
+          dealerDiv.innerHTML = "";
+          hiddenDiv.innerHTML = "";
+          hiddenDiv.style.display = "none";
           startButton.style.display = "block";
           choiceDiv.style.display = "none";
           hitButton.style.display = "none";
@@ -208,9 +218,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
         player.hit(deck.cards);
 
         let playerNewhand = document.createElement("p");
-        console.log(playerHitcount);
-        console.log(playerIndex);
-        console.log(player.hand[playerIndex]);
         playerNewhand.appendChild(document.createTextNode(player.hand[playerIndex].name + " of " + player.hand[playerIndex].suit));
         playerDiv.appendChild(playerNewhand);
 
@@ -221,11 +228,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
         if (dealer.valueCalc(dealer.hand) < 18 && dealer.turn === true) {
           console.log(dealer.hand.length);
           dealerHitcount += 1;
+          let dealerIndex = dealerHitcount + 1;
           dealer.hit(deck.cards);
           console.log("NEW HAND");
           console.log(dealer.hand.length);
           let cardHand = document.createElement("p");
           cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS "));
+
+          let dealerHiddenHand = document.createElement("p");
+          dealerHiddenHand.appendChild(document.createTextNode(dealer.hand[dealerIndex].name + " of " + dealer.hand[dealerIndex].suit));
+          hiddenDiv.appendChild(dealerHiddenHand);
 
           dealerDiv.appendChild(cardHand);
           dealer.passTurn();
@@ -262,11 +274,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
         if (dealer.valueCalc(dealer.hand) < 18 && dealer.turn === true) {
           console.log(dealer.hand.length);
           dealerHitcount += 1;
+          let dealerIndex = dealerHitcount + 1;
           dealer.hit(deck.cards);
           console.log("NEW HAND");
           console.log(dealer.hand.length);
           let cardHand = document.createElement("p");
           cardHand.appendChild(document.createTextNode(dealer.hand.length + " CARDS "));
+
+          let dealerHiddenHand = document.createElement("p");
+          dealerHiddenHand.appendChild(document.createTextNode(dealer.hand[dealerIndex].name + " of " + dealer.hand[dealerIndex].suit));
+          hiddenDiv.appendChild(dealerHiddenHand);
 
           dealerDiv.appendChild(cardHand);
           dealer.passTurn();
